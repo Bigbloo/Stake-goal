@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah 🌺 - Technique Gagnante</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #4b6cb7 0%, #8a2be2 100%);
+            color: white;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .alert-message {
+            background-color: rgba(255, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid rgba(255, 0, 0, 0.5);
+        }
+        
+        .intro-message {
+            font-size: 1.3rem;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            color: #FFD700;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .cta-image {
+            width: 100%;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .cta-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            text-align: center;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Carousel styles */
+        .carousel {
+            position: relative;
+            margin: 30px 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+        }
+        
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carousel-control.prev {
+            left: 10px;
+        }
+        
+        .carousel-control.next {
+            right: 10px;
+        }
+        
+        /* FAQ styles */
+        .faq-container {
+            margin: 30px 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .faq-answer {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+        
+        .faq-answer.active {
+            padding: 15px;
+            max-height: 500px;
+        }
+        
+        .arrow {
+            transition: transform 0.3s;
+        }
+        
+        .arrow.active {
+            transform: rotate(180deg);
+        }
+        
+        .highlight {
+            color: #FFD700;
+            font-weight: bold;
+        }
+        
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            margin: 40px 0 20px;
+            background-color: #FFD700;
+            color: #000;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            background-color: #FFC107;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .cta-button:active {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .alert-message, .intro-message {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .cta-button {
+                font-size: 1.2rem;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="photo de profil.png" alt="Sarah" class="profile-img">
+            <h1>Sarah 🌺</h1>
+        </div>
+        
+        <div class="alert-message">
+            🚨 Regarde cette vidéo jusqu'au bout pour comprendre la technique !🚨
+        </div>
+        
+        <p class="intro-message">
+            TECHNIQUE 100% gagnante ! 🎰
+        </p>
+        
+        <div class="video-container">
+            <video controls autoplay muted>
+                <source src="Video.MOV" type="video/mp4">
+                Votre navigateur ne supporte pas la lecture de vidéos.
+            </video>
+        </div>
+        
+        <a href="https://go.affiliatemystake.com/visit/?bta=3142911&nci=5358" target="_blank">
+            <img src="image CTA.png" alt="Appel à l'action" class="cta-image">
+        </a>
+        
+        <h2 class="section-title">Gains Récents 💸</h2>
+        
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <img src="Gains Récents 1.png" alt="Gains récents 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="Gains Récents 2 .jpg" alt="Gains récents 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="Gains Récents 3.png" alt="Gains récents 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="Gains Récents 4.png" alt="Gains récents 4">
+                </div>
+            </div>
+            <button class="carousel-control prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-control next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
+        <h2 class="section-title">Questions Fréquentes ❓</h2>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    Y'a un bonus si je dépose ?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>💬 Oui, et c'est automatique.</p>
+                    <p>Dès que tu déposes au moins 10€, ton dépôt est doublé instantanément — pas besoin de code promo.</p>
+                    <p><br></p>
+                    <p class="highlight">🔥 Tu déposes 20€ ➝ tu joues avec 40€</p>
+                    <p class="highlight">💸 Tu déposes 100€ ➝ tu joues direct avec 200€</p>
+                    <p><br></p>
+                    <p>✅ Le bonus x2 est garanti à chaque dépôt, peu importe le montant.</p>
+                    <p>Et si tu joues dans la foulée, t'as même souvent un petit bonus surprise 🎉</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Est-ce qu'on peut retirer l'argent ?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>💬 Bien sûr !</p>
+                    <p><br></p>
+                    <p>Dès que t'as gagné, tu peux retirer sur ton compte bancaire et tu recevras en 2 jours sur ton compte bancaire comme un virement classique. 💳</p>
+                    <p><br></p>
+                    <p>✨ Simple et rapide :</p>
+                    <p class="highlight">🏦 Demande de retrait</p>
+                    <p class="highlight">⏱️ Traitement sous 2h</p>
+                    <p class="highlight">💸 Virement sur ton compte</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Où sont les jeux ?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>🎮 Une fois inscrit et connecté, et que ton premier dépôt sera fait :</p>
+                    <p><br></p>
+                    <p class="highlight">🎲 Accès aux mini-jeux exclusifs</p>
+                    <p class="highlight">🎯 Interface intuitive</p>
+                    <p class="highlight">🌟 Bonus spéciaux débloqués</p>
+                    <p><br></p>
+                    <p>⚡ Tout est instantané après ton dépôt !</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    C'est fiable ?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>🔒 Absolument sûr et certifié !</p>
+                    <p><br></p>
+                    <p>✅ Site de jeu officiellement certifié</p>
+                    <p>✅ Actif dans plusieurs pays</p>
+                    <p>✅ Paiements sécurisés</p>
+                    <p><br></p>
+                    <p>🎯 Notre philosophie :</p>
+                    <p class="highlight">💫 Tu déposes</p>
+                    <p class="highlight">🎮 Tu joues</p>
+                    <p class="highlight">💸 Tu retires</p>
+                    <p><br></p>
+                    <p>Simple. Sans prise de tête. ✨</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    C'est quoi exactement le jeu ?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>🎮 Mini-jeu ultra rapide et simple :</p>
+                    <p><br></p>
+                    <p class="highlight">⚡ Quelques clics suffisent</p>
+                    <p class="highlight">💫 Possibilité de doubler instantanément</p>
+                    <p class="highlight">🔥 Le même jeu que tu vois sur TikTok et Insta !</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Est-ce que ça marche sur téléphone ?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>📱 100% compatible mobile !</p>
+                    <p><br></p>
+                    <p>✨ Optimisé pour ton téléphone</p>
+                    <p>🚀 Interface fluide et intuitive</p>
+                    <p>💫 Pas besoin d'ordinateur</p>
+                    <p><br></p>
+                    <p>Tout se fait depuis ton tel en quelques clics ! 🎯</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Est-ce que je peux tester sans déposer ?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>🔍 Voici comment ça marche :</p>
+                    <p><br></p>
+                    <p>✅ Explorer le site : Gratuit</p>
+                    <p>🎮 Accès aux jeux : Après dépôt</p>
+                    <p>💎 Dépôt minimum : 20€</p>
+                    <p><br></p>
+                    <p>⭐ Notre conseil : Commence avec le minimum pour tester !</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    C'est quoi le minimum pour jouer ?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>💫 Commence avec seulement 20€ !</p>
+                    <p><br></p>
+                    <p class="highlight">🎯 Parfait pour tester</p>
+                    <p class="highlight">🎁 Bonus doublé automatiquement</p>
+                    <p class="highlight">⭐ Accès à tous les jeux</p>
+                    <p><br></p>
+                    <p>✨ Pas besoin de mettre plus pour ta première fois !</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Je trouve pas le bouton pour jouer, il est où ?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>🎮 Super simple à trouver :</p>
+                    <p><br></p>
+                    <p class="highlight">📱 Fais défiler jusqu'en bas de page</p>
+                    <p class="highlight">🎯 Clique sur le bouton "Commencer à jouer"</p>
+                    <p class="highlight">⚡ Le mini-jeu se lance instantanément</p>
+                    <p><br></p>
+                    <p>✨ Et c'est parti pour jouer ! 🎲</p>
+                </div>
+            </div>
+        </div>
+        
+        <a href="https://go.affiliatemystake.com/visit/?bta=3142911&nci=5358" class="cta-button" target="_blank">
+            COMMENCEZ À JOUER
+        </a>
+    </div>
+
+    <script>
+        // Carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselInner = document.querySelector('.carousel-inner');
+            const prevBtn = document.querySelector('.carousel-control.prev');
+            const nextBtn = document.querySelector('.carousel-control.next');
+            const items = document.querySelectorAll('.carousel-item');
+            
+            let currentIndex = 0;
+            const itemCount = items.length;
+            
+            // Set initial position
+            updateCarousel();
+            
+            // Auto slide every 5 seconds
+            let autoSlide = setInterval(nextSlide, 5000);
+            
+            // Reset timer when manually changing slides
+            function resetTimer() {
+                clearInterval(autoSlide);
+                autoSlide = setInterval(nextSlide, 5000);
+            }
+            
+            function updateCarousel() {
+                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+            
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % itemCount;
+                updateCarousel();
+            }
+            
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + itemCount) % itemCount;
+                updateCarousel();
+            }
+            
+            nextBtn.addEventListener('click', function() {
+                nextSlide();
+                resetTimer();
+            });
+            
+            prevBtn.addEventListener('click', function() {
+                prevSlide();
+                resetTimer();
+            });
+            
+            // FAQ functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const arrow = this.querySelector('.arrow');
+                    
+                    // Toggle active class
+                    answer.classList.toggle('active');
+                    arrow.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
